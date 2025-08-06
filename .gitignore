@@ -1,0 +1,12 @@
+# Build artifacts
+build/
+bin/
+
+# Compilation database - regenerate per machine
+compile_commands.json
+
+# OS-specific
+.DS_Store
+*~
+*.swp
+.cache
