@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "filter.h"
 
@@ -28,7 +29,34 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    // Need to read chunks over and over again until EOF
+    // For now, let's just print the Chunk values, maybe only the chunk type
+    // TODO
+    while (1) {
+        // Read Chunk
+        Chunk *curr_chunk = read_chunk(in_fp);
+        if (curr_chunk == NULL) {
+            printf("Exiting.\n");
+            free(filename);
+            free(out_filename);
+            fclose(in_fp);
+            return 1;
+        }
+
+        if (strncmp(curr_chunk->type.type, "IEND", 4) == 0) {
+            printf("IEND reached.\n");
+            free(curr_chunk->data);
+            free(curr_chunk);
+            break;
+        }
+
+        printf("Chunk Type: %.4s\n", curr_chunk->type.type);
+        free(curr_chunk->data);
+        free(curr_chunk);
+    }
+
     // Freeing memory and exiting
+    fclose(in_fp);
     free(filename);
     free(out_filename);
     return 0;

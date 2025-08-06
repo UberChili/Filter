@@ -12,7 +12,7 @@ BUILDDIR = build
 BINDIR = bin
 
 # Object files (all go to build directory)
-OBJS = $(BUILDDIR)/main.o $(BUILDDIR)/helpers.o $(BUILDDIR)/png.o
+OBJS = $(BUILDDIR)/main.o $(BUILDDIR)/helpers.o $(BUILDDIR)/png.o $(BUILDDIR)/chunk.o
 
 # Main target
 $(BINDIR)/filter: $(OBJS) | $(BINDIR)
@@ -28,6 +28,10 @@ $(BUILDDIR)/helpers.o: $(SRCDIR)/helpers.c $(INCDIR)/filter.h | $(BUILDDIR)
 
 # Compile png.c
 $(BUILDDIR)/png.o: $(SRCDIR)/png.c $(INCDIR)/filter.h | $(BUILDDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Compile chunk.c
+$(BUILDDIR)/chunk.o: $(SRCDIR)/chunk.c $(INCDIR)/filter.h | $(BUILDDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # Create directories if they don't exist
