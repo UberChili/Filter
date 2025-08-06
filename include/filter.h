@@ -30,4 +30,7 @@ typedef struct {
 // Reads a single Chunk
 Chunk *read_chunk(FILE *fp);
 
+// Parses the IHDR Chunk
+void parseIHDR(Chunk *chunk);
+
 /* #endif // FILTER_H_ */

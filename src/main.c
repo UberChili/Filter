@@ -50,6 +50,11 @@ int main(int argc, char *argv[]) {
             break;
         }
 
+        if (strncmp(curr_chunk->type.type, "IHDR", 4) == 0) {
+            printf("IHDR Chunk found.\n");
+            parseIHDR(curr_chunk);
+        }
+
         printf("Chunk Type: %.4s\n", curr_chunk->type.type);
         free(curr_chunk->data);
         free(curr_chunk);
