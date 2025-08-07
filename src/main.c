@@ -29,11 +29,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    // Need to read chunks over and over again until EOF
-    // For now, let's just print the Chunk values, maybe only the chunk type
-    // TODO
+    // Read chunks until finding IEND Chunk
     while (1) {
-        // Read Chunk
         Chunk *curr_chunk = read_chunk(in_fp);
         if (curr_chunk == NULL) {
             printf("Exiting.\n");
